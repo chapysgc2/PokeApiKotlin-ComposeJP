@@ -1,6 +1,6 @@
 package com.rafemo.ultimatedex.data.remote.response
 
 data class GenerationVi(
-    val omegaruby-alphasapphire: OmegarubyAlphasapphire,
-    val x-y: XY
+    val omegarubyalphasapphire: OmegarubyAlphasapphire,
+    val xy: XY
 )
