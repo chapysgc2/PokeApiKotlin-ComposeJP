@@ -73,23 +73,25 @@ class PokemonListViewModel @Inject constructor(
             val result = repository.getPokemonList(PAGE_SIZE, currentPage * PAGE_SIZE)
             when (result) {
                 is Resource.Success -> {
-                    endReached.value = currentPage * PAGE_SIZE >= result.data!!.count
+                    if (result.data != null) {
+                        endReached.value = currentPage * PAGE_SIZE >= result.data!!.count
 
-                    val pokedexEntries = result.data.results.mapIndexed { index, entry ->
-                        val number = getPokedexNumber(entry)
-                        val url = getImageUrl(number)
-                        PokedexListEntry(
-                            entry.name.replaceFirstChar(Char::titlecase),
-                            url,
-                            number.toInt()
-                        )
+                        val pokedexEntries = result.data.results.mapIndexed { index, entry ->
+                            val number = getPokedexNumber(entry)
+                            val url = getImageUrl(number)
+                            PokedexListEntry(
+                                entry.name.replaceFirstChar(Char::titlecase),
+                                url,
+                                number.toInt()
+                            )
+                        }
+
+                        currentPage++
+                        pokemonList.value += pokedexEntries
                     }
-
-                    currentPage++
 
                     loadError.value = ""
                     isLoading.value = false
-                    pokemonList.value += pokedexEntries
                 }
                 is Resource.Error -> {
                     loadError.value = result.message!!
