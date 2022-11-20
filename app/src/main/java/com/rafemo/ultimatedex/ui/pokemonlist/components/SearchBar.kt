@@ -55,7 +55,6 @@ fun SearchBar(
                 modifier = Modifier
                     .padding(horizontal = 20.dp, vertical = 12.dp)
             )
-
         }
     }
 }

@@ -12,6 +12,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.rafemo.ultimatedex.ui.pokemonlist.viewmodel.PokemonListViewModel
 
 @Composable
@@ -24,32 +26,39 @@ fun PokemonList(
     val loadError by remember { viewModel.loadError }
     val isLoading by remember { viewModel.isLoading }
     val isSearching by remember { viewModel.isSearching }
+    val isRefreshing by remember { viewModel.isRefreshing }
 
     // Like RecyclerView but in Compose
-    LazyColumn(
-        contentPadding = PaddingValues(16.dp)
-    ) {
-        val itemCount = if (pokemonList.size % 2 == 0) {
-            pokemonList.size / 2
-        } else {
-            pokemonList.size / 2 + 1
-        }
-        items(itemCount) {
 
-            // Scroll down, load more Pokémons!
-            if (it >= itemCount - 1 && !endReached && !isLoading && !isSearching) {
-                LaunchedEffect(key1 = true) {
-                    viewModel.loadPokemonList()
-                }
+    SwipeRefresh(state = rememberSwipeRefreshState(isRefreshing = isRefreshing), onRefresh = {
+        viewModel.refresh()
+    }) {
+        LazyColumn(
+            contentPadding = PaddingValues(16.dp)
+        ) {
+            val itemCount = if (pokemonList.size % 2 == 0) {
+                pokemonList.size / 2
+            } else {
+                pokemonList.size / 2 + 1
             }
+            items(itemCount) {
 
-            PokedexRow(
-                rowIndex = it,
-                entries = pokemonList,
-                navController = navController
-            )
+                // Scroll down, load more Pokémons!
+                if (it >= itemCount - 1 && !endReached && !isLoading && !isSearching) {
+                    LaunchedEffect(key1 = true) {
+                        viewModel.loadPokemonList()
+                    }
+                }
+
+                PokedexRow(
+                    rowIndex = it,
+                    entries = pokemonList,
+                    navController = navController
+                )
+            }
         }
     }
+
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier.fillMaxSize()

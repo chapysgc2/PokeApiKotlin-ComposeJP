@@ -26,6 +26,7 @@ fun PokemonDetailStateWrapper(
             )
         }
         is Resource.Error -> {
+            // TODO: Improve message error, maybe a Dialog ?
             Text(
                 text = pokemonDetail.message!!,
                 color = Color.Red,

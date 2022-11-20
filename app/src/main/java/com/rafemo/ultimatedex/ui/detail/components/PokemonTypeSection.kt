@@ -35,7 +35,7 @@ fun PokemonTypeSection(
                     .padding(horizontal = 8.dp)
                     .clip(CircleShape)
                     .background(parseTypeToColor(type))
-                    .height(36.dp)
+                    .height(32.dp)
             ) {
                 Text(
                     text = type.type.name.replaceFirstChar {

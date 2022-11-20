@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.lifecycle.lifecycleScope
-import com.rafemo.ultimatedex.presentation.navigation.Navigation
+import com.rafemo.ultimatedex.ui.navigation.Navigation
 import com.rafemo.ultimatedex.ui.theme.JetpackComposePokedexTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay

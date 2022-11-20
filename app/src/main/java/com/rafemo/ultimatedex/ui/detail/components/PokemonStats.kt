@@ -52,39 +52,51 @@ fun PokemonStats(
         animationPlayed = true
     }
 
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(height)
-            .clip(CircleShape)
-            .background(
-                Color(0xFF505050)
-            )
+    Row(modifier = Modifier
+        .height(height)
     ) {
-        Row(
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically,
+        Text(
+            text = statName,
+            fontFamily = Roboto,
+            color = MaterialTheme.colors.onSurface,
+            modifier = Modifier.fillMaxWidth(0.2f)
+        )
+        Spacer(modifier = Modifier.width(8.dp))
+        Text(
+            text = (currentPercent.value * statMaxValue).toInt().toString(),
+            fontFamily = Roboto,
+            color = MaterialTheme.colors.onSurface,
+            modifier = Modifier.size(40.dp)
+        )
+        Spacer(modifier = Modifier.width(8.dp))
+
+        val padding = (height/3.dp).dp
+
+        Box(
             modifier = Modifier
+                .fillMaxWidth()
                 .fillMaxHeight()
-                .fillMaxWidth(currentPercent.value)
+                .padding(top = padding, bottom = padding)
                 .clip(CircleShape)
-                .background(statColor)
-                .padding(horizontal = 8.dp)
+                .background(
+                    Color(0xFF505050)
+                )
         ) {
-            Text(
-                text = statName,
-                fontFamily = Roboto,
-                fontWeight = FontWeight.SemiBold,
-                color = MaterialTheme.colors.background
-            )
-            Text(
-                text = (currentPercent.value * statMaxValue).toInt().toString(),
-                fontFamily = Roboto,
-                fontWeight = FontWeight.SemiBold,
-                color = MaterialTheme.colors.background
-            )
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .fillMaxWidth(currentPercent.value)
+                    .clip(CircleShape)
+                    .background(statColor)
+                    .padding(horizontal = 8.dp)
+            ) {
+
+            }
         }
     }
+
 }
 
 @Composable

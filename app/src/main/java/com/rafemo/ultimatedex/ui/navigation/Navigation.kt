@@ -1,4 +1,4 @@
-package com.rafemo.ultimatedex.presentation.navigation
+package com.rafemo.ultimatedex.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember

@@ -24,6 +24,7 @@ class PokemonListViewModel @Inject constructor(
     var loadError = mutableStateOf("")
     var isLoading = mutableStateOf(false)
     var endReached = mutableStateOf(false)
+    var isRefreshing = mutableStateOf(false)
 
     private var cachedPokemonList = listOf<PokedexListEntry>()
     private var isSearchStarting = true
@@ -31,6 +32,12 @@ class PokemonListViewModel @Inject constructor(
 
     init {
         loadPokemonList()
+    }
+
+    fun refresh() {
+        isRefreshing.value = true
+        currentPage = 0 // Reset page
+        loadPokemonList(true)
     }
 
     // TODO: Search online, not only already loaded pokémon
@@ -66,7 +73,7 @@ class PokemonListViewModel @Inject constructor(
         }
     }
 
-    fun loadPokemonList() {
+    fun loadPokemonList(fromRefresh: Boolean = false) {
         viewModelScope.launch {
             isLoading.value = true
 
@@ -87,7 +94,13 @@ class PokemonListViewModel @Inject constructor(
                         }
 
                         currentPage++
-                        pokemonList.value += pokedexEntries
+
+                        if (fromRefresh) {
+                            pokemonList.value = pokedexEntries
+                            isRefreshing.value = false
+                        } else {
+                            pokemonList.value += pokedexEntries
+                        }
                     }
 
                     loadError.value = ""

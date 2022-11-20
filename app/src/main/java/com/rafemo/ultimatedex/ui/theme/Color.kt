@@ -11,7 +11,7 @@ val AtkColor = Color(0xFFE0352E)
 val DefColor = Color(0xFFEE8130)
 val SpAtkColor = Color(0xFF7C47FC)
 val SpDefColor = Color(0xFFF7D02C)
-val SpdColor = Color(0xFF5083F0)
+val SpdColor = Color(0xFF6390F0)
 
 val TypeNormal = Color(0xFFA8A77A)
 val TypeFire = Color(0xFFEE8130)
