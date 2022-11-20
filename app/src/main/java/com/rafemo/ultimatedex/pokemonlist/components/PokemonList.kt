@@ -29,14 +29,17 @@ fun PokemonList(
 
     // Like RecyclerView but in Compose
     LazyColumn(contentPadding = PaddingValues(16.dp)) {
-        val itemCount = pokemonList.size
+        val itemCount = if(pokemonList.size % 2 == 0) {
+            pokemonList.size / 2
+        } else {
+            pokemonList.size / 2 + 1
+        }
         items(itemCount) {
 
             // Scroll down, load more Pokémons!
-            if(it >= itemCount - 1 && !endReached) {
+            if(it >= itemCount - 1 && !endReached && !isLoading) {
                 viewModel.loadPokemonList()
             }
-
 
             PokedexRow(
                 rowIndex = it,
