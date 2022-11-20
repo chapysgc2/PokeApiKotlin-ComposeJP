@@ -9,15 +9,15 @@ import androidx.compose.ui.graphics.Color
 
 
 private val DarkColorPalette = darkColors(
-    primary = Color.Yellow,
-    background = Color(0xFF101010),
+    primary = Color(0xFF901010),
+    background = Color(0xFF212121),
     onBackground = Color.White,
     surface = Color(0xFF303030),
     onSurface = Color.White
 )
 
 private val LightColorPalette = lightColors(
-    primary = Color.Blue,
+    primary = LightBlue,
     background = Color.LightGray,
     onBackground = Color.Black,
     surface = Color.White,
@@ -26,11 +26,13 @@ private val LightColorPalette = lightColors(
 
 @Composable
 fun JetpackComposePokedexTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
-    val colors = if (darkTheme) {
+
+    // TODO: Add light theme, for the moment just dark theme is available :(
+    val colors = //if (darkTheme) {
         DarkColorPalette
-    } else {
-        LightColorPalette
-    }
+//    } else {
+//        LightColorPalette
+//    }
 
     MaterialTheme(
         colors = colors,

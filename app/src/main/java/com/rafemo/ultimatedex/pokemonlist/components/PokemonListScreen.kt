@@ -1,39 +1,34 @@
-package com.rafemo.ultimatedex.pokemonlist
+package com.rafemo.ultimatedex.pokemonlist.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.focus.onFocusChanged
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.rafemo.ultimatedex.pokemonlist.SearchBar
 
 @Composable
 fun PokemonListScreen(
     navController: NavController
 ) {
     Surface(
-        color = MaterialTheme.colors.background,
+        color = MaterialTheme.colors.surface,
         modifier = Modifier.fillMaxSize()
     ) {
         Column {
-            Spacer(modifier = Modifier.height(24.dp))
+            // TODO: Search online, not only already loaded pokémon
             SearchBar(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp),
+                    .background(MaterialTheme.colors.background),
                 hint = "Search...",
             ) {
 
             }
+            PokemonList(navController = navController)
         }
 
     }
