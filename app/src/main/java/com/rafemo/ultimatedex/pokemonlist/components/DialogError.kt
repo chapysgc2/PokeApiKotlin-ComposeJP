@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
@@ -99,6 +98,7 @@ fun ErrorBox(
             ) {
 
                 TextButton(
+                    modifier = Modifier.fillMaxWidth(),
                     onClick = {
                         setShowDialog(false)
                         onRetry()

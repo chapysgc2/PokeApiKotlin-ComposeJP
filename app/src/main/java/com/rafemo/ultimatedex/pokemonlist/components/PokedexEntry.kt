@@ -36,40 +36,6 @@ fun PokedexEntry(
 
     val roundedCornerSize = 16.dp
 
-//    Card(
-//        modifier = Modifier
-//            .border(
-//                1.dp,
-//                color = MaterialTheme.colors.primary,
-//                shape = RoundedCornerShape(roundedCornerSize)
-//            )
-//            .shadow(5.dp, RoundedCornerShape(roundedCornerSize)),
-//        shape = RoundedCornerShape(roundedCornerSize),
-//    ) {
-//        Column(
-//            modifier = Modifier.padding(16.dp, 8.dp, 16.dp, 8.dp)
-//        ) {
-//            Spacer(modifier = Modifier.width(16.dp))
-//            AsyncImage(
-//                model = ImageRequest.Builder(LocalContext.current)
-//                    .data(entry.imageUrl)
-//                    .crossfade(true)
-//                    .build(),
-//                contentDescription = entry.pokemonName,
-//                modifier = Modifier
-//                    .size(100.dp)
-//            )
-//            Text(
-//                text = "#${entry.number} ${entry.pokemonName}",
-//                fontFamily = Roboto,
-//                fontWeight = FontWeight.Bold,
-//                fontSize = 16.sp,
-//                modifier = Modifier.fillMaxWidth()
-//            )
-//            Spacer(modifier = Modifier.width(16.dp))
-//        }
-//    }
-
     Card (
         modifier = modifier
             .background(
@@ -101,14 +67,25 @@ fun PokedexEntry(
                     .align(Alignment.CenterHorizontally)
             )
             Text(
-                text = "#${entry.number} ${entry.pokemonName}",
+                text = "#${entry.number}",
+                fontFamily = Roboto,
+                fontWeight = FontWeight.SemiBold,
+                fontSize = 12.sp,
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp, 0.dp, 8.dp, 0.dp)
+            )
+            // TODO: Max 2 lines, enable ellipsize
+            Text(
+                text = entry.pokemonName,
                 fontFamily = Roboto,
                 fontWeight = FontWeight.Bold,
                 fontSize = 16.sp,
                 textAlign = TextAlign.Center,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(8.dp, 0.dp, 8.dp, 0.dp)
+                    .padding(start = 8.dp, end = 8.dp)
             )
             Spacer(modifier = Modifier.height(topAndBottomMargin))
         }
