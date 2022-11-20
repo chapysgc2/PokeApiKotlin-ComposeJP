@@ -108,6 +108,7 @@ fun PokedexEntry(
                 textAlign = TextAlign.Center,
                 modifier = Modifier
                     .fillMaxWidth()
+                    .padding(8.dp, 0.dp, 8.dp, 0.dp)
             )
             Spacer(modifier = Modifier.height(topAndBottomMargin))
         }

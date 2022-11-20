@@ -26,10 +26,13 @@ fun PokemonList(
     val endReached by remember { viewModel.endReached }
     val loadError by remember { viewModel.loadError }
     val isLoading by remember { viewModel.isLoading }
+    val isSearching by remember { viewModel.isSearching }
 
     // Like RecyclerView but in Compose
-    LazyColumn(contentPadding = PaddingValues(16.dp)) {
-        val itemCount = if(pokemonList.size % 2 == 0) {
+    LazyColumn(
+        contentPadding = PaddingValues(16.dp)
+    ) {
+        val itemCount = if (pokemonList.size % 2 == 0) {
             pokemonList.size / 2
         } else {
             pokemonList.size / 2 + 1
@@ -37,7 +40,7 @@ fun PokemonList(
         items(itemCount) {
 
             // Scroll down, load more Pokémons!
-            if(it >= itemCount - 1 && !endReached && !isLoading) {
+            if (it >= itemCount - 1 && !endReached && !isLoading && !isSearching) {
                 viewModel.loadPokemonList()
             }
 
@@ -52,17 +55,17 @@ fun PokemonList(
         contentAlignment = Alignment.Center,
         modifier = Modifier.fillMaxSize()
     ) {
-        val showDialog =  remember { mutableStateOf(false) }
+        val showDialog = remember { mutableStateOf(false) }
 
-        if(isLoading) {
+        if (isLoading) {
             CircularProgressIndicator(color = MaterialTheme.colors.primary)
         }
 
-        if(loadError.isNotEmpty()) {
+        if (loadError.isNotEmpty()) {
             showDialog.value = true
         }
 
-        if(showDialog.value) {
+        if (showDialog.value) {
             DialogError(error = loadError, onRetry = {
                 viewModel.loadPokemonList()
             }, {

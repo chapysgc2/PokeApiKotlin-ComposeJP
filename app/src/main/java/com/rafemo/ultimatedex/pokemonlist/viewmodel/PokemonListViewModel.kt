@@ -1,13 +1,8 @@
 package com.rafemo.ultimatedex.pokemonlist.viewmodel
 
-import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.Drawable
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.palette.graphics.Palette
 import com.rafemo.ultimatedex.data.models.PokedexListEntry
 import com.rafemo.ultimatedex.data.remote.response.Result
 import com.rafemo.ultimatedex.repository.PokemonRepositoryImpl
@@ -16,13 +11,12 @@ import com.rafemo.ultimatedex.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
 class PokemonListViewModel @Inject constructor(
     private val repository: PokemonRepositoryImpl
-): ViewModel() {
+) : ViewModel() {
 
     private var currentPage = 0
 
@@ -31,8 +25,45 @@ class PokemonListViewModel @Inject constructor(
     var isLoading = mutableStateOf(false)
     var endReached = mutableStateOf(false)
 
+    private var cachedPokemonList = listOf<PokedexListEntry>()
+    private var isSearchStarting = true
+    var isSearching = mutableStateOf(false)
+
     init {
         loadPokemonList()
+    }
+
+    // TODO: Search online, not only already loaded pokémon
+    fun searchPokemonList(query: String) {
+        val listToSearch = if (isSearchStarting) {
+            pokemonList.value
+        } else {
+            // If we typed at least one character
+            cachedPokemonList
+        }
+        viewModelScope.launch(Dispatchers.Default) {
+            if (query.isEmpty()) {
+                pokemonList.value = cachedPokemonList
+                isSearching.value = false
+                isSearchStarting = true
+                return@launch
+            }
+
+            val results = listToSearch.filter {
+                // Search by name or pokédex number
+                it.pokemonName.contains(query.trim(), true) ||
+                        it.number.toString() == query.trim()
+            }
+
+            if (isSearchStarting) {
+                cachedPokemonList = pokemonList.value
+                isSearchStarting = false
+            }
+
+            // Update entries with the results
+            pokemonList.value = results
+            isSearching.value = true
+        }
     }
 
     fun loadPokemonList() {
@@ -40,7 +71,7 @@ class PokemonListViewModel @Inject constructor(
             isLoading.value = true
 
             val result = repository.getPokemonList(PAGE_SIZE, currentPage * PAGE_SIZE)
-            when(result) {
+            when (result) {
                 is Resource.Success -> {
                     endReached.value = currentPage * PAGE_SIZE >= result.data!!.count
 
@@ -74,7 +105,7 @@ class PokemonListViewModel @Inject constructor(
     }
 
     private fun getPokedexNumber(entry: Result): String {
-        return if(entry.url.endsWith("/")) {
+        return if (entry.url.endsWith("/")) {
             entry.url.dropLast(1).takeLastWhile { it.isDigit() }
         } else {
             entry.url.takeLastWhile { it.isDigit() }
