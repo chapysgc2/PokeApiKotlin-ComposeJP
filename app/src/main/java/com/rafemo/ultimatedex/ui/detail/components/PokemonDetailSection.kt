@@ -1,23 +1,18 @@
 package com.rafemo.ultimatedex.ui.detail.components
 
-import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.rafemo.ultimatedex.data.remote.response.Pokemon
-import com.rafemo.ultimatedex.R
 import java.util.*
 
 
@@ -36,6 +31,8 @@ fun PokemonDetailSection(
             .offset(y = 100.dp)
             .verticalScroll(scrollState)
     ) {
+        Spacer(modifier = Modifier.height(16.dp))
+
         Text(
             text = "#${pokemonDetail.id} ${
                 pokemonDetail.name.replaceFirstChar {
@@ -49,6 +46,8 @@ fun PokemonDetailSection(
         )
 
         PokemonTypeSection(types = pokemonDetail.types)
+
+        Spacer(modifier = Modifier.height(16.dp))
 
         PokemonDetailDataSection(
             pokemonWeight = pokemonDetail.weight,
@@ -74,6 +73,7 @@ fun PokemonDetailSection(
 
         PokemonBaseStats(pokemonDetail = pokemonDetail)
 
-        Spacer(modifier = Modifier.height(16.dp))
+        // Set space equal to the column offset, it handles screen orientation
+        Spacer(modifier = Modifier.height(100.dp))
     }
 }

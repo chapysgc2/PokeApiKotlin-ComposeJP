@@ -42,6 +42,9 @@ fun PokemonDetailScreen(
                 .fillMaxHeight(0.2f)
                 .align(Alignment.TopCenter)
         )
+
+        val roundedCornerShape = RoundedCornerShape(topStart = 10.dp, topEnd = 10.dp)
+
         PokemonDetailStateWrapper(
             pokemonDetail = pokemonDetail,
             modifier = Modifier
@@ -50,12 +53,12 @@ fun PokemonDetailScreen(
                     top = topPadding + pokemonImageSize / 2f,
                     start = 16.dp,
                     end = 16.dp,
-                    bottom = 16.dp
+                    bottom = 0.dp
                 )
-                .shadow(10.dp, RoundedCornerShape(10.dp))
-                .clip(RoundedCornerShape(10.dp))
+                .shadow(10.dp, roundedCornerShape)
+                .clip(roundedCornerShape)
                 .background(MaterialTheme.colors.background)
-                .padding(16.dp)
+                .padding(start = 24.dp, end = 24.dp)
                 .align(Alignment.BottomCenter),
             loadingModifier = Modifier
                 .size(100.dp)
@@ -67,6 +70,7 @@ fun PokemonDetailScreen(
                     bottom = 16.dp
                 )
         )
+
         Box(
             contentAlignment = Alignment.TopCenter,
             modifier = Modifier
