@@ -31,8 +31,8 @@ App developed with Kotlin and Jetpack Compose. Uses PokeAPI to show Pokemon data
 -------------------------------------------
 
 <p align="middle" float="left">
-  <img src="/img1.png" width="100" />
-  <img src="/img.png" width="100" />
+  <img src="/img_1.png" width="250" />
+  <img src="/img.png" width="250" />
 </p>
 
 ```
