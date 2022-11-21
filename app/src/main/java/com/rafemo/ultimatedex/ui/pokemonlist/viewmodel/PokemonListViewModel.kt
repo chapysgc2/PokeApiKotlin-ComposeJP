@@ -118,11 +118,11 @@ class PokemonListViewModel @Inject constructor(
         }
     }
 
-    private fun getImageUrl(number: String): String {
+    fun getImageUrl(number: String): String {
         return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${number}.png"
     }
 
-    private fun getPokedexNumber(entry: Result): String {
+    fun getPokedexNumber(entry: Result): String {
         return if (entry.url.endsWith("/")) {
             entry.url.dropLast(1).takeLastWhile { it.isDigit() }
         } else {
