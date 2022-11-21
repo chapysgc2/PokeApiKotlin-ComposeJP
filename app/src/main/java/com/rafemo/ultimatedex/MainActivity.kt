@@ -21,7 +21,7 @@ class MainActivity : ComponentActivity() {
         // Testing on 2 Xiaomi devices:
         // - Xiaomi Mi 8 Lite (Android 10)
         // - Xiaomi Mi 11T Pro (Android 12)
-        // Compose doesn't start and doesn't set content on launch and pokemon list won't load.
+        // Compose doesn't start and doesn't set content on launch -> Pokemon list won't load.
         // Also, when the screen orientation changes, do the same problem. Doesn't load any content.
         // It seems adding a little delay make it work :)
 
