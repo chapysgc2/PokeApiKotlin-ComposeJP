@@ -1,28 +1,18 @@
 # Ultimate-Dex
-App developed with Kotlin and Jetpack Compose. Uses PokeAPI to show Pokemon data.
+App desarrollada con los lenguajes Kotlin y Jetpack Compose. Se uso la PokeAPI en vez de bd para mostrar los pokemons.
 
 -------------------------------------------
 
-###### Architecture
+###### Arquitectura
 - MVVM
 
-###### Design
+###### Diseno
 - Jetpack Compose
 
-###### Network
-- Retrofit
-
-###### Dependency injection
-- Hilt
-
 ###### Images
-- Coil
+- Pixel 6 pro y pixel 7 pro
 
-###### Testing
-- JUnit 4
-- Mockito
-
-###### Other dependencies
+###### otras dependencias agregadas
 - Couroutines
 - Compose Navigation
 - Hilt Navigation
@@ -33,8 +23,10 @@ App developed with Kotlin and Jetpack Compose. Uses PokeAPI to show Pokemon data
 <p align="middle" float="left">
   <img src="/img_1.png" width="250" />
   <img src="/img.png" width="250" />
+  <img src="/imag_3" width="250" />
+ 
 </p>
 
 ```
-Developed by rafemo
+Developed by Hazel Alain (chapysgc2)
 ```
